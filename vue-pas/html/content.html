@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/framework7.material.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/framework7.material.colors.min.css" />
+		<style type="text/css">
+			.list-block {
+				margin: 15px 0;
+				border: 0;
+				padding-left: 15px;
+				background-color: #fff;
+			}
+			
+			ul {
+				border: 0;
+			}
+			
+			.list-block ul:before {
+				background-color: #fff;
+			}
+			
+			.list-block ul:after {
+				background-color: #fff;
+			}
+			
+			.swipeout {
+				padding: 15px 0px;
+				background-color: #fff;
+				border-bottom: 1px solid #333;
+				/*margin-bottom: 5px;*/
+			}
+			
+			.list_content {
+				width: 100%;
+				display: flex;
+				justify-content: space-between
+			}
+			
+			.avatar {
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				background: red;
+				color: #fff;
+				text-align: center;
+				line-height: 50px;
+				font-size: 24px;
+				float: left;
+			}
+			
+			.list_center{
+				flex-grow: 1;
+				display: flex;
+				flex-flow: column;
+				padding-left: 15px;
+			}
+			.list_center .title{
+				font-weight: 100;
+				margin-bottom: 0;
+			}
+			.list_right{
+				padding-right: 15px;
+				line-height: 50px;
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div id="app">
+				<div class="list-block">
+					<ul>
+						<li class="swipeout">
+							<div class="swipeout-content item-content">
+								<div class="list_content">
+									<div class="avatar">微</div>
+									<div class="list_center">
+										<h4 class="title">微博</h4>
+										<input type="password" value="ddddddd" disabled="disabled"/>
+									</div>
+									<div class="list_right">
+										查看
+									</div>
+								</div>
+
+							</div>
+							<div class="swipeout-actions-right">
+								<a href="#" class="action1 bg-red">删除</a>
+							</div>
+						</li>
+
+					</ul>
+				</div>
+
+			</div>
+
+			<a href="#" class="floating-button color-blue">
+				<i class="icon icon-plus"></i>
+			</a>
+		</div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/framework7.js"></script>
+	<script src="../js/vue.min.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el: '#app',
+			data: {
+				msg: 'aaa'
+			}
+		})
+		var myApp = new Framework7();
+		mui.init();
+		mui.plusReady(function() {
+			//			设备id
+			//			mui.alert(plus.device.uuid)
+		})
+	</script>
+
+</html>

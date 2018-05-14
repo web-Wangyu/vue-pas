@@ -125,5 +125,36 @@
 				}
 			}
 		}
+	},
+	"dependencies": {
+		"pages": {
+			"index.html": {
+				"resources": [
+					"html/add.html",
+					"html/content.html"
+				],
+				"refer": [
+					"html/login.html",
+					"html/user.html"
+				],
+				"priority": 0
+			},
+			"html/add.html": {
+				"resources": [],
+				"refer": [
+					"html/login.html"
+				],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"js/mui.min.js",
+				"fonts/mui.ttf",
+				"css/mui.min.css",
+				"js/mui.js",
+				"css/mui.css"
+			]
+		}
 	}
 }
