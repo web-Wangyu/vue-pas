@@ -8,12 +8,18 @@
 			"html/add.html",
 			"html/login.html",
 			"html/content.html",
-			"html/user.html"
+			"html/user.html",
+			"html/regd.html"
 		]
 	},
 	"html/add.html": {
 		"refer": [
 			"html/login.html"
+		]
+	},
+	"html/content.html": {
+		"refer": [
+			"html/add.html"
 		]
 	}
 }

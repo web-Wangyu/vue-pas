@@ -5,56 +5,210 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/mdui.css" rel="stylesheet" />
+		<style type="text/css">
+			#app {
+				background: #fff;
+			}
+			
+			.list-block {
+				margin: 15px 0;
+				border: 0;
+				padding-left: 15px;
+				background-color: #fff;
+			}
+			
+			#app {
+				background: #fff;
+				padding-top: 50px
+			}
+			
+			.mdui-list-item {
+				padding: 0;
+				margin-left: 20px;
+				/*border-bottom: 1px solid #BDBDBD;*/
+				flex-direction: column;
+				margin-top: 15px;
+			}
+			
+			.mdui-list-item:hover {
+				background: #fff;
+			}
+			
+			.mdui-list-item:after {
+				height: 15px;
+				visibility: hidden;
+				content: ' ';
+			}
+			
+			.mdui-list-item_box {
+				width: 100%;
+				display: flex;
+			}
+			
+			.title_right {
+				margin-left: 15px;
+				margin-top: -10px;
+			}
+			
+			.mdui-list-item-avatar {
+				color: #fff;
+				font-size: 20px;
+			}
+			
+			.mdui-list-item-content {
+				width: 100%;
+				flex: 1;
+			}
+			
+			.mdui-textfield {
+				width: 100%;
+				flex-grow: 1;
+				display: flex;
+				flex-direction: column;
+				padding-top: 5px;
+			}
+			
+			.password {
+				margin-top: 10px;
+			}
+			
+			input {
+				border: 0;
+			}
+			
+			.mdui-textfield-input {
+				width: 85%;
+				float: left;
+			}
+			
+			.see {
+				float: right;
+				margin-left: 10px;
+			}
+			
+			.mdui-btn {
+				width: 80%;
+				margin-left: 10%;
+				height: 45px;
+				line-height: 45px;
+				font-size: 18px;
+				margin-top: 50px;
+			}
+			
+			.mdui-divider-inset {
+				margin-left: 0;
+				width: 95%;
+				margin-left: 2.5%;
+			}
+			
+			.memo {
+				padding-left: 20px;
+			}
+			
+			.mdui-textfield-focus .mdui-textfield-input,
+			.mdui-textfield-focus .mdui-textfield-input:hover {
+				border-bottom-color: #1E88E;
+				-webkit-box-shadow: 0 1px 0 0 #1E88E;
+				box-shadow: 0 1px 0 0 #1E88E;
+			}
+		</style>
 	</head>
 
 	<body>
-		<div class="mui-content">
-			<ul class="mui-table-view">
-				<li onclick="openNewView()" class="mui-table-view-cell mui-media">
-					<a href="javascript:;">
-						<img class="mui-media-object mui-pull-right" src="http://placehold.it/40x30">
-						<div class="mui-media-body">
-							幸福
-							<p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+			<div id="app">
+				<ul class="mdui-list">
+					<li class="mdui-list-item">
+						<div class="mdui-list-item_box">
+							<div :class="color_" class="mdui-list-item-avatar">{{title.slice(0,1)}}</div>
+							<div class="mdui-textfield mdui-textfield-floating-label title_right">
+								<label class="mdui-textfield-label">标题</label>
+								<textarea class="mdui-textfield-input" v-model="title"></textarea>
+							</div>
 						</div>
-					</a>
-				</li>
-				<li class="mui-table-view-cell mui-media">
-					<a href="javascript:;">
-						<img class="mui-media-object mui-pull-right" src="http://placehold.it/40x30">
-						<div class="mui-media-body">
-							木屋
-							<p class="mui-ellipsis">想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>
+						<div class="mdui-textfield">
+							<div class="user">
+								<label class="mdui-textfield-label">账号</label>
+								<input class="mdui-textfield-input" type="text" v-model="user">
+							</div>
+							<div class="password">
+								<label class="mdui-textfield-label">密码</label>
+								<input class="mdui-textfield-input" :type="type" v-model="pas">
+								<i @click="chack()" class="mdui-icon material-icons see">{{see}}</i>
+							</div>
 						</div>
-					</a>
-				</li>
-				<li class="mui-table-view-cell mui-media">
-					<a href="javascript:;">
-						<img class="mui-media-object mui-pull-right" src="http://placehold.it/40x30">
-						<div class="mui-media-body">
-							CBD
-							<p class="mui-ellipsis">烤炉模式的城，到黄昏，如同打翻的调色盘一般.</p>
-						</div>
-					</a>
-				</li>
-			</ul>
-		</div>
+					</li>
+				</ul>
+				<div class="mdui-divider-inset"></div>
+				<div class="mdui-textfield mdui-textfield-floating-label memo">
+					<label class="mdui-textfield-label">备注</label>
+					<textarea class="mdui-textfield-input"></textarea>
+				</div>
+				<button @click="add()" class="mdui-btn mdui-shadow-5 mdui-btn-raised mdui-ripple mdui-color-blue-600">保存</button>
+			</div>
 	</body>
 	<script src="../js/mui.min.js"></script>
+	<script src="../js/av-min.js"></script>
+	<script src="../js/mdui.js"></script>
+	<script src="../js/vue.min.js"></script>
 	<script type="text/javascript">
+		var APP_ID = 'tHeX246kA2boiotrw2Fcbpf4-gzGzoHsz';
+		var APP_KEY = 'EXhnwYVcVFrKo8HsLw15UVNX';
+		AV.init({
+			appId: APP_ID,
+			appKey: APP_KEY
+		});
+		var app = new Vue({
+			el: '#app',
+			data: {
+				type: 'password',
+				see: 'visibility',
+				title: '',
+				color_arr: ['mdui-color-purple-400',
+					'mdui-color-pink-500',
+					'mdui-color-teal-600',
+					'mdui-color-blue-grey',
+					'mdui-color-blue-800',
+					'mdui-color-green-600',
+					'mdui-color-deep-orange-a400',
+					'mdui-color-red-a400',
+					'mdui-color-cyan-700'
+				],
+				color_: '',
+				user: '',
+				pas: ''
+			},
+
+			methods: {
+				chack: function() {
+					this.type == 'password' ? this.type = 'text' : this.type = 'password';
+					this.see == 'visibility' ? this.see = 'visibility_off' : this.see = 'visibility';
+					mui.alert(this.title)
+				},
+				color: function() {
+					this.color_ = this.color_arr[Math.floor(Math.random() * this.color_arr.length)];
+				},
+				add:function() {
+					
+				}
+
+			}
+		});
+		app.color()
+
+		
+
 		mui.init();
 		mui.plusReady(function() {
 
 		})
-		
-		function openNewView(){
+
+		function openNewView() {
 			mui.openWindow({
-				url:'login.html',
-				id:'login.html'
+				url: 'login.html',
+				id: 'login.html'
 			})
 		}
-		
 	</script>
 
 </html>

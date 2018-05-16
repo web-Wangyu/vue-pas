@@ -5,9 +5,8 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link href="../css/mui.min.css" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="../css/framework7.material.min.css" />
-		<link rel="stylesheet" type="text/css" href="../css/framework7.material.colors.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mdui.css" />
+
 		<style type="text/css">
 			.list-block {
 				margin: 15px 0;
@@ -16,106 +15,122 @@
 				background-color: #fff;
 			}
 			
-			ul {
+			#app {
+				background: #fff;
+			}
+			
+			.mdui-list-item {
+				padding: 0;
+				margin-left: 20px;
+				border-bottom: 1px solid #BDBDBD;
+				flex-direction: column;
+				margin-top: 15px;
+			}
+			
+			.mdui-list-item:hover {
+				background: #fff;
+			}
+			
+			.mdui-list-item:after {
+				height: 15px;
+				visibility: hidden;
+				content: ' ';
+			}
+			
+			.mdui-list-item_box {
+				width: 100%;
+				display: flex;
+			}
+			
+			.mdui-list-item-avatar {
+				color: #fff;
+				font-size: 20px;
+			}
+			
+			.mdui-list-item-content {
+				width: 100%;
+				flex: 1;
+			}
+			
+			.mdui-textfield {
+				width: 100%;
+				flex-grow: 1;
+				display: flex;
+				flex-direction: column;
+				padding-top: 5px;
+			}
+			
+			.password {
+				margin-top: 10px;
+			}
+			
+			input {
 				border: 0;
 			}
 			
-			.list-block ul:before {
-				background-color: #fff;
-			}
-			
-			.list-block ul:after {
-				background-color: #fff;
-			}
-			
-			.swipeout {
-				padding: 15px 0px;
-				background-color: #fff;
-				border-bottom: 1px solid #333;
-				/*margin-bottom: 5px;*/
-			}
-			
-			.list_content {
-				width: 100%;
-				display: flex;
-				justify-content: space-between
-			}
-			
-			.avatar {
-				width: 50px;
-				height: 50px;
-				border-radius: 50%;
-				background: red;
-				color: #fff;
-				text-align: center;
-				line-height: 50px;
-				font-size: 24px;
+			.mdui-textfield-input {
+				width: 85%;
 				float: left;
 			}
 			
-			.list_center{
-				flex-grow: 1;
-				display: flex;
-				flex-flow: column;
-				padding-left: 15px;
+			.see {
+				float: right;
+				margin-left: 10px;
 			}
-			.list_center .title{
-				font-weight: 100;
-				margin-bottom: 0;
-			}
-			.list_right{
-				padding-right: 15px;
-				line-height: 50px;
-			}
-			
 		</style>
 	</head>
 
 	<body>
-		<div class="mui-content">
+
 			<div id="app">
-				<div class="list-block">
-					<ul>
-						<li class="swipeout">
-							<div class="swipeout-content item-content">
-								<div class="list_content">
-									<div class="avatar">微</div>
-									<div class="list_center">
-										<h4 class="title">微博</h4>
-										<input type="password" value="ddddddd" disabled="disabled"/>
-									</div>
-									<div class="list_right">
-										查看
-									</div>
-								</div>
-
+				<ul class="mdui-list">
+					<li class="mdui-list-item">
+						<div class="mdui-list-item_box">
+							<div class="mdui-list-item-avatar mdui-color-purple-a200">B</div>
+							<div class="mdui-list-item-content">Brendan Lim</div>
+						</div>
+						<div class="mdui-textfield">
+							<div class="user">
+								<label class="mdui-textfield-label">账号</label>
+								<input class="mdui-textfield-input" type="text" value="555" disabled>
 							</div>
-							<div class="swipeout-actions-right">
-								<a href="#" class="action1 bg-red">删除</a>
+							<div class="password">
+								<label class="mdui-textfield-label">密码</label>
+								<input class="mdui-textfield-input" :type="type" value="555" disabled>
+								<i @click="chack()" class="mdui-icon material-icons see">{{see}}</i>
 							</div>
-						</li>
+						</div>
+					</li>
 
-					</ul>
-				</div>
-
+				</ul>
+				<button @click="add()" class="mdui-shadow-5 mdui-fab mdui-fab-fixed mdui-ripple mdui-color-blue-600"><i class="mdui-icon material-icons">add</i></button>
 			</div>
-
-			<a href="#" class="floating-button color-blue">
-				<i class="icon icon-plus"></i>
-			</a>
-		</div>
 	</body>
-	<script src="../js/mui.min.js"></script>
-	<script src="../js/framework7.js"></script>
+
 	<script src="../js/vue.min.js"></script>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/mdui.js"></script>
 	<script type="text/javascript">
 		var app = new Vue({
 			el: '#app',
 			data: {
-				msg: 'aaa'
+				type: 'password',
+				see: 'visibility'
+			},
+			methods: {
+				chack: function() {
+					this.type == 'password' ? this.type = 'text' : this.type = 'password';
+					this.see == 'visibility' ? this.see = 'visibility_off' : this.see = 'visibility';
+				},
+				add:function(){
+					mui.openWindow({
+						url:'add.html',
+						id:'add'
+					})
+				}
 			}
 		})
-		var myApp = new Framework7();
+
 		mui.init();
 		mui.plusReady(function() {
 			//			设备id
