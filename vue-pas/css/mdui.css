@@ -6212,9 +6212,9 @@ th.mdui-table-cell-checkbox .mdui-checkbox {
   border-bottom: 1px solid #1E88E5;
   -webkit-box-shadow: 0 1px 0 0 #1E88E5;
           box-shadow: 0 1px 0 0 #1E88E5;
-  border-bottom: 1px solid rgba(0, 0, 0, .87);
+  /*border-bottom: 1px solid rgba(0, 0, 0, .87);
   -webkit-box-shadow: 0 1px 0 0 rgba(0, 0, 0, .87);
-          box-shadow: 0 1px 0 0 rgba(0, 0, 0, .87);
+          box-shadow: 0 1px 0 0 rgba(0, 0, 0, .87);*/
 }
 .mdui-textfield-input[rows] {
   height: auto !important;
@@ -6277,12 +6277,11 @@ th.mdui-table-cell-checkbox .mdui-checkbox {
    ============= */
 .mdui-textfield-focus .mdui-textfield-input,
 .mdui-textfield-focus .mdui-textfield-input:hover {
-				border-bottom-color: #1E88E5;
-				-webkit-box-shadow: 0 1px 0 0 #1E88E5;
+				
 
-  border-bottom-color: #c51162;
-  -webkit-box-shadow: 0 1px 0 0 #c51162;
-          box-shadow: 0 1px 0 0 #c51162;
+  border-bottom-color: #1E88E5;
+  -webkit-box-shadow: 0 1px 0 0 #1E88E5;
+          box-shadow: 0 1px 0 0 #1E88E5;
 
 }
 .mdui-textfield-focus .mdui-textfield-label,
@@ -6303,8 +6302,7 @@ th.mdui-table-cell-checkbox .mdui-checkbox {
           transform: scale(.75) translateY(0);
 }
 .mdui-textfield-floating-label.mdui-textfield-focus .mdui-textfield-label {
-  color: #1E8E5;
-  color: #e91e63;
+  color: #1E88E5;
 }
 /* 可展开文本框，默认向右展开
    ========== */

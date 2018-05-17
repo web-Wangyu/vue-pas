@@ -8,7 +8,9 @@
 		<link href="../css/mdui.css" rel="stylesheet" />
 		<style type="text/css">
 			#app {
+				width: 100%;
 				background: #fff;
+				overflow: hidden;
 			}
 			
 			.list-block {
@@ -22,6 +24,8 @@
 				background: #fff;
 				padding-top: 50px
 			}
+			
+			.mdui-list {}
 			
 			.mdui-list-item {
 				padding: 0;
@@ -116,36 +120,38 @@
 	</head>
 
 	<body>
-			<div id="app">
-				<ul class="mdui-list">
-					<li class="mdui-list-item">
-						<div class="mdui-list-item_box">
-							<div :class="color_" class="mdui-list-item-avatar">{{title.slice(0,1)}}</div>
-							<div class="mdui-textfield mdui-textfield-floating-label title_right">
-								<label class="mdui-textfield-label">标题</label>
-								<textarea class="mdui-textfield-input" v-model="title"></textarea>
-							</div>
+		<div id="app">
+			<ul class="mdui-list">
+				<li class="mdui-list-item">
+					<div class="mdui-list-item_box">
+						<div :class="color_" class="mdui-list-item-avatar">{{title.slice(0,1)}}</div>
+						<div class="mdui-textfield mdui-textfield-floating-label title_right">
+							<label class="mdui-textfield-label">标题</label>
+							<textarea class="mdui-textfield-input" v-model="title"></textarea>
 						</div>
-						<div class="mdui-textfield">
-							<div class="user">
-								<label class="mdui-textfield-label">账号</label>
-								<input class="mdui-textfield-input" type="text" v-model="user">
-							</div>
-							<div class="password">
-								<label class="mdui-textfield-label">密码</label>
-								<input class="mdui-textfield-input" :type="type" v-model="pas">
-								<i @click="chack()" class="mdui-icon material-icons see">{{see}}</i>
-							</div>
+					</div>
+					<div class="mdui-textfield">
+						<div class="user">
+							<label class="mdui-textfield-label">账号</label>
+							<input class="mdui-textfield-input" type="text" v-model="user">
 						</div>
-					</li>
-				</ul>
-				<div class="mdui-divider-inset"></div>
-				<div class="mdui-textfield mdui-textfield-floating-label memo">
-					<label class="mdui-textfield-label">备注</label>
-					<textarea class="mdui-textfield-input"></textarea>
-				</div>
-				<button @click="add()" class="mdui-btn mdui-shadow-5 mdui-btn-raised mdui-ripple mdui-color-blue-600">保存</button>
+						<div class="password">
+							<label class="mdui-textfield-label">密码</label>
+							<input class="mdui-textfield-input" :type="type" v-model="pas">
+							<i @click="chack()" class="mdui-icon material-icons see">{{see}}</i>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<div class="mdui-divider-inset"></div>
+			<div class="mdui-textfield mdui-textfield-floating-label memo">
+				<label class="mdui-textfield-label">备注</label>
+				<textarea class="mdui-textfield-input" v-model="memo"></textarea>
+				<p>备注选填</p>
 			</div>
+			
+			<button @click="add()" class="mdui-btn mdui-shadow-5 mdui-btn-raised mdui-ripple mdui-color-blue-600">添加</button>
+		</div>
 	</body>
 	<script src="../js/mui.min.js"></script>
 	<script src="../js/av-min.js"></script>
@@ -158,6 +164,12 @@
 			appId: APP_ID,
 			appKey: APP_KEY
 		});
+
+		var uuid = ''
+		mui.init();
+		mui.plusReady(function() {
+			uuid = plus.device.uuid
+		})
 		var app = new Vue({
 			el: '#app',
 			data: {
@@ -176,39 +188,60 @@
 				],
 				color_: '',
 				user: '',
-				pas: ''
+				pas: '',
+				memo:''
 			},
 
 			methods: {
 				chack: function() {
 					this.type == 'password' ? this.type = 'text' : this.type = 'password';
 					this.see == 'visibility' ? this.see = 'visibility_off' : this.see = 'visibility';
-					mui.alert(this.title)
 				},
 				color: function() {
 					this.color_ = this.color_arr[Math.floor(Math.random() * this.color_arr.length)];
 				},
-				add:function() {
+				add: function() {
+					var this_ = this;
 					
+					if(this.title == ''){
+						mui.alert('标题不能为空!');
+						return
+					}
+					if(this.user == ''){
+						mui.alert('账号不能为空!');
+						return
+					}
+										if(this.pas == ''){
+						mui.alert('密码不能为空!');
+						return
+					}
+
+
+					
+					
+					// 声明类型
+					var TodoFolder = AV.Object.extend('pas');
+					// 新建对象
+					var todoFolder = new TodoFolder();
+					// 设置名称
+					todoFolder.set('title', this_.title);
+					todoFolder.set('color', this_.color_);
+					todoFolder.set('user', this_.title);
+					todoFolder.set('password', this_.pas);
+					todoFolder.set('memo', this_.memo);
+					todoFolder.set('priority', 1);
+					todoFolder.save().then(function(todo) {
+						mui.alert('添加成功！');
+						mui.back()
+					}, function(error) {
+						console.error(error);
+					});
+
 				}
 
 			}
 		});
 		app.color()
-
-		
-
-		mui.init();
-		mui.plusReady(function() {
-
-		})
-
-		function openNewView() {
-			mui.openWindow({
-				url: 'login.html',
-				id: 'login.html'
-			})
-		}
 	</script>
 
 </html>
